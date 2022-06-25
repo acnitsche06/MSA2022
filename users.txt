@@ -1,2 +1,5 @@
 testuser, testpass
 testuser2, testpass2
+testname3, testpass3
+hellomate, imaustralian
+krisway, hopeitworks
