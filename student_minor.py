@@ -52,10 +52,7 @@ elif user_option == "2":
         #If valid, write to users.txt file and move on
         if(username_length >=4 and username_length <= 12 and password_length >=6 and password_length <= 16):
             user_file = open("users.txt", "a")
-            user_file.write(user_name)
-            user_file.write(", ")
-            user_file.write(user_pass)
-            user_file.write("\n")
+            user_file.write(f"{user_name}, {user_pass}\n")
             user_file.close()
             print("\nAccount successfully created")
             run_again = False
@@ -65,7 +62,15 @@ elif user_option == "2":
             print("ERROR: Incorrect password and/or user name length\n")
             continue
 
+print("Ask user for student data")
+#Create 3 empty list for student name, scores, and letter grades
+student_names = []
+student_scores = []
+student_letter_grades = []
+
 #Ask user how many students to enter data for
+num_of_students = input("Enter the amount of students you need to enter data for: ")
+
 #Prompt user to enter student name and number score
 #Store data somewhere
 #Convert the number score to a letter grade
