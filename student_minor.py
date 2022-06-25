@@ -1,6 +1,5 @@
+#student_minor
 #Print the menu
-
-
 print("Select option from menu\n__________________________")
 print("1. Login")
 print("2. Create User")
@@ -13,7 +12,7 @@ while True:
         print("\nERROR: Enter a 1 or 2")
         continue
     else:
-        print("Good job you followed directions")
+        print("Good job you followed directions\n")
         break
 
 #If user chose 1, ask for username and password; and check username and password combination in the users.txt file
@@ -39,10 +38,32 @@ if user_option == "1":
         else:
             print(f"User {user_name} not found!\n")
 
+#If user chose 2, ask for username and password
+elif user_option == "2":
+    run_again = True
+    while(run_again):
+        user_name = input("Please enter your username (4-12 characters): ")
+        user_pass = input("Please enter your password (6-16 characters): ")
 
-#If user chose 2, ask for username and password; and validate username and password length.
-#-If valid, write to users.txt file and move on
-#If not vaild reprompt user
+        #Validate length of username and passowrord
+        username_length = len(user_name)
+        password_length = len(user_pass)
+
+        #If valid, write to users.txt file and move on
+        if(username_length >=4 and username_length <= 12 and password_length >=6 and password_length <= 16):
+            user_file = open("users.txt", "a")
+            user_file.write(user_name)
+            user_file.write(", ")
+            user_file.write(user_pass)
+            user_file.write("\n")
+            user_file.close()
+            print("\nAccount successfully created")
+            run_again = False
+
+        #If not vaild reprompt user
+        else:
+            print("ERROR: Incorrect password and/or user name length\n")
+            continue
 
 #Ask user how many students to enter data for
 #Prompt user to enter student name and number score
