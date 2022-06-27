@@ -1,5 +1,9 @@
 #student_minor
 #Print the menu
+import numbers
+from turtle import st
+
+
 print("Select option from menu\n__________________________")
 print("1. Login")
 print("2. Create User")
@@ -69,12 +73,41 @@ student_scores = []
 student_letter_grades = []
 
 #Ask user how many students to enter data for
-num_of_students = input("Enter the amount of students you need to enter data for: ")
+num_of_students = int(input("Enter number of students to enter grades for: "))
+for counter in range(num_of_students):
+    #Prompt user to enter student name and number score
+    student_name = input("Enter student name: ")
+    student_score = float(input("Enter student score: "))
+    print("\n______________")
+    
+    #Store data in lists
+    student_names.append(student_name)
+    student_scores.append(student_score)
 
-#Prompt user to enter student name and number score
-#Store data somewhere
-#Convert the number score to a letter grade
-
+    #Convert the number score to a letter grade and store in the letter grade list
+    #use an if and elif and else statement
+    if student_score > 100:
+        student_letter_grades.append("A++")
+    elif student_score >= 89.5 and student_score <= 100:
+        student_letter_grades.append("A")
+    elif student_score >= 79.5 and student_score < 89.5:
+        student_letter_grades.append("B")
+    elif student_score >= 69.5 and student_score < 79.5:
+        student_letter_grades.append("C")
+    elif student_score >= 59.5 and student_score < 69.5:
+        student_letter_grades.append("D")
+    else:
+        student_letter_grades.append("F")
 
 #Print student data(name, score, grade)
+class_total = 0
+index = 0
+for counter in range(num_of_students):
+    print(f"{student_names[index]}: {student_scores[index]}: {student_letter_grades[index]}")
+    class_total = class_total + student_scores[index]
+    index = index + 1
+
 #Calculate and print class average
+amount_students = len(num_of_students)
+class_average = class_total / amount_students
+print(f"Your class average is: {class_average}")
