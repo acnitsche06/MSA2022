@@ -1,8 +1,5 @@
 #student_minor
-#Print the menu
-import numbers
-from turtle import st
-
+#Print the Menu
 
 print("Select option from menu\n__________________________")
 print("1. Login")
@@ -66,19 +63,38 @@ elif user_option == "2":
             print("ERROR: Incorrect password and/or user name length\n")
             continue
 
-print("Ask user for student data")
 #Create 3 empty list for student name, scores, and letter grades
 student_names = []
 student_scores = []
 student_letter_grades = []
 
 #Ask user how many students to enter data for
-num_of_students = int(input("Enter number of students to enter grades for: "))
+while True:
+    try:
+        num_of_students = int(input("Enter number of students to enter grades for: "))
+        if num_of_students < 1:
+            print("ERROR: Value must be 1 or more\n")
+            continue
+    except:
+        print("ERROR: Input must be a number\n")
+    else:
+        break
 for counter in range(num_of_students):
-    #Prompt user to enter student name and number score
+    #Prompt user to enter student name and number score and make sure it is a number
+    while True:
+        try:
+            student_score = float(input("Enter student score: "))
+            if student_score < 0:
+                print("ERROR: Input can't be a negative number\n")
+                continue
+        except:
+            print("ERROR: Input must be a number\n")
+        else:
+            break
+  
     student_name = input("Enter student name: ")
-    student_score = float(input("Enter student score: "))
-    print("\n______________")
+
+    print("\n___________________")
     
     #Store data in lists
     student_names.append(student_name)
@@ -107,7 +123,8 @@ for counter in range(num_of_students):
     class_total = class_total + student_scores[index]
     index = index + 1
 
+print("\n____________________________")
 #Calculate and print class average
-amount_students = len(num_of_students)
+amount_students = len(student_scores)
 class_average = class_total / amount_students
 print(f"Your class average is: {class_average}")
