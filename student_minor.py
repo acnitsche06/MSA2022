@@ -17,6 +17,31 @@ def get_user_option():
         else:
             print("Good job you followed directions\n")
             break
+    return user_option
+
+def login_user(u_name, u_pass):
+    user_file = open("users.txt", "r")
+    user_found = False
+    for line in user_file:
+        credentials = line.split(", ")
+        #Check if username and password are valid
+        if u_name == credentials[0] and u_pass == credentials[1].rstrip():
+            #If valid, write to users.txt file and move on to prompt for student data
+            user_found = True
+            break
+    return user_found
+
+def create_user(u_name, u_pass):
+    pass
+
+def validate_username_or_password(user_credential, min_length, max_length):
+    if(user_credential >= min_length and user_credential <= max_length):
+        return True
+
+    #If not vaild reprompt user
+    else:
+        print("ERROR: Incorrect password and/or user name length\n")
+        return False
 
 def main():
     print_main_menu()
@@ -24,22 +49,13 @@ def main():
     user_option = get_user_option()
 
     #If user chose 1, ask for username and password; and check username and password combination in the users.txt file
-    if user_option == "1":
+    if user_option == '1':
         while True:
             user_name = input("Please enter your user name: ")
             user_pass = input("Please enter your password: ")
-            #Open the users files
-            user_file = open("users.txt", "r")
-            user_found = False
-            for line in user_file:
-                credentials = line.split(", ")
-                #Check if username and password are valid
-                if user_name == credentials[0] and user_pass == credentials[1].rstrip():
-                    #If valid, write to users.txt file and move on to prompt for student data
-                    user_found = True
-                    break
+            user_logged_in = login_user(user_name, user_pass)
 
-            if user_found:
+            if user_logged_in:
                 print(f"User {user_name} successfully logged in!\n")
                 break
             #If not valid reprompt the user
@@ -47,9 +63,8 @@ def main():
                 print(f"User {user_name} not found!\n")
 
     #If user chose 2, ask for username and password
-    elif user_option == "2":
-        run_again = True
-        while(run_again):
+    elif user_option == '2':
+        while True:
             user_name = input("Please enter your username (4-12 characters): ")
             user_pass = input("Please enter your password (6-16 characters): ")
 
@@ -63,7 +78,7 @@ def main():
                 user_file.write(f"{user_name}, {user_pass}\n")
                 user_file.close()
                 print("\nAccount successfully created")
-                run_again = False
+                break
 
             #If not vaild reprompt user
             else:
